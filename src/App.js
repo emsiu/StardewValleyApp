@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 import { fruits } from './Fruits';
@@ -62,16 +63,23 @@ class StardewValleyApp extends React.Component {
   }
 }
 
-class ItemList extends React.Component {
-  render() {
-    return (
-      <ul>
-        {this.props.items.map(item => (
-          <li key={item.id}>{item.text}</li>
-        ))}
-      </ul>
-    );
-  }
+function ItemList(props) {
+  const { items } = props;
+  return (
+    <ul>
+      {items.map(item => (
+        <li key={item.id}>{item.text}</li>
+      ))}
+    </ul>
+  );
 }
+
+ItemList.propTypes = {
+  items: PropTypes.node,
+};
+
+ItemList.defaultProps = {
+  items: null,
+};
 
 export default StardewValleyApp;
