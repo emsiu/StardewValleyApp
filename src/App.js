@@ -13,7 +13,7 @@ class StardewValleyApp extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
   handleChange(e) {
     this.setState({
       text: e.target.value,
@@ -21,13 +21,14 @@ class StardewValleyApp extends React.Component {
   }
 
   handleSubmit(e) {
+    const { text: stateText } = this.state;
     e.preventDefault();
-    if (!this.state.text.length) {
+    if (!stateText.length) {
       return;
     }
     const newItem = {
-      text: this.state.text,
-      id: Date.now()
+      text: stateText,
+      id: Date.now(),
     };
     this.setState(state => ({
       items: state.items.concat(newItem),
@@ -36,23 +37,23 @@ class StardewValleyApp extends React.Component {
   }
 
   render() {
+    const { items, text } = this.state;
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <ItemList items={fruits} />
-          <ItemList items={this.state.items} />
+          <ItemList items={items} />
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="new-item">Add an item</label>
-            <br />
             <input
               id="new-item"
               onChange={this.handleChange}
-              value={this.state.text}
+              value={text}
             />
             <br />
-            <button>
-              Add item #{this.state.items.length + 1}
+            <button type="submit">
+              Add item #
+              {items.length + 1}
             </button>
           </form>
         </header>
