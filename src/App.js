@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
+import './Item.css';
 import { fruits } from './Fruits';
+import Item from './Item';
 
 class StardewValleyApp extends React.Component {
   constructor(props) {
@@ -68,14 +70,16 @@ function ItemList(props) {
   return (
     <ul>
       {items.map(item => (
-        <li key={item.id}>{item.text}</li>
+        <li key={item.id}>
+          <Item key={item.id} item={item} />
+        </li>
       ))}
     </ul>
   );
 }
 
 ItemList.propTypes = {
-  items: PropTypes.node,
+  items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])),
 };
 
 ItemList.defaultProps = {

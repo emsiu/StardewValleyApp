@@ -1,0 +1,14 @@
+.item {
+  cursor: pointer;
+  background: #282c34;
+  padding-right: 2.1em;
+  padding-left: 2.1em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  outline: none;
+}
+
+.item.active {
+  background: darkcyan;
+  color: white;
+}

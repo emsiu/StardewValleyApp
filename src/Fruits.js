@@ -1,90 +1,90 @@
 export const fruits = [
   {
-    text: 'Ancient Fruit',
+    name: 'Ancient Fruit',
     id: 1,
   },
   {
-    text: 'Apple',
+    name: 'Apple',
     id: 2,
   },
   {
-    text: 'Apricot',
+    name: 'Apricot',
     id: 3,
   },
   {
-    text: 'Blackberry',
+    name: 'Blackberry',
     id: 4,
   },
   {
-    text: 'Blueberry',
+    name: 'Blueberry',
     id: 5,
   },
   {
-    text: 'Cactus Fruit',
+    name: 'Cactus Fruit',
     id: 6,
   },
   {
-    text: 'Cherry',
+    name: 'Cherry',
     id: 7,
   },
   {
-    text: 'Coconut',
+    name: 'Coconut',
     id: 8,
   },
   {
-    text: 'Cranberries',
+    name: 'Cranberries',
     id: 9,
   },
   {
-    text: 'Crystal Fruit',
+    name: 'Crystal Fruit',
     id: 10,
   },
   {
-    text: 'Grape',
+    name: 'Grape',
     id: 11,
   },
   {
-    text: 'Hot Pepper',
+    name: 'Hot Pepper',
     id: 12,
   },
   {
-    text: 'Melon',
+    name: 'Melon',
     id: 13,
   },
   {
-    text: 'Orange',
+    name: 'Orange',
     id: 14,
   },
   {
-    text: 'Peach',
+    name: 'Peach',
     id: 15,
   },
   {
-    text: 'Pomegranate',
+    name: 'Pomegranate',
     id: 16,
   },
   {
-    text: 'Rhubarb',
+    name: 'Rhubarb',
     id: 17,
   },
   {
-    text: 'Salmonberry',
+    name: 'Salmonberry',
     id: 18,
   },
   {
-    text: 'Spice Berry',
+    name: 'Spice Berry',
     id: 19,
   },
   {
-    text: 'Starfruit',
+    name: 'Starfruit',
     id: 20,
   },
   {
-    text: 'Strawberry',
+    name: 'Strawberry',
     id: 21,
   },
   {
-    text: 'Wild Plum',
+    name: 'Wild Plum',
     id: 22,
   },
 ];
