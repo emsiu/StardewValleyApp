@@ -9,6 +9,7 @@ class Item extends React.Component {
       class: 'item',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleClick() {
@@ -19,6 +20,12 @@ class Item extends React.Component {
     });
   }
 
+  handleKeyPress(e) {
+    if (e.keyCode === 13) { // Enter key
+      this.handleClick();
+    }
+  }
+
   render() {
     const { class: stateClass } = this.state;
     const { item } = this.props;
@@ -26,6 +33,9 @@ class Item extends React.Component {
       <div
         className={stateClass}
         onClick={this.handleClick}
+        onKeyUp={this.handleKeyPress}
+        role="button"
+        tabIndex={0}
       >
         {item.name}
       </div>
