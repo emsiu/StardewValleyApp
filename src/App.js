@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {fruits} from './Fruits.js';
 
 class StardewValleyApp extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class StardewValleyApp extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <ItemList items={fruits} />
           <ItemList items={this.state.items} />
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="new-item">Add an item</label>
