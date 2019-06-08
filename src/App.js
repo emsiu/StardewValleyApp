@@ -1,47 +1,22 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {fruits} from './Fruits.js';
+import { fruits } from './Fruits';
 
 class StardewValleyApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
-      text: ''
+      text: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <ItemList items={fruits} />
-          <ItemList items={this.state.items} />
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="new-item">Add an item</label>
-            <br></br>
-            <input
-              id="new-item"
-              onChange={this.handleChange}
-              value={this.state.text}
-            />
-            <br></br>
-            <button>
-              Add item #{this.state.items.length + 1}
-            </button>
-          </form>
-        </header>
-      </div>
-    );
-  }
   
   handleChange(e) {
     this.setState({
-      text: e.target.value
+      text: e.target.value,
     });
   }
 
@@ -56,8 +31,33 @@ class StardewValleyApp extends React.Component {
     };
     this.setState(state => ({
       items: state.items.concat(newItem),
-      text: ''
+      text: '',
     }));
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <ItemList items={fruits} />
+          <ItemList items={this.state.items} />
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="new-item">Add an item</label>
+            <br />
+            <input
+              id="new-item"
+              onChange={this.handleChange}
+              value={this.state.text}
+            />
+            <br />
+            <button>
+              Add item #{this.state.items.length + 1}
+            </button>
+          </form>
+        </header>
+      </div>
+    );
   }
 }
 
