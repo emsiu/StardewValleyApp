@@ -1,94 +1,94 @@
-export const fruits = [
+export const FRUITS = [
   {
     name: 'Ancient Fruit',
-    id: 1,
+    id: 0,
   },
   {
     name: 'Apple',
-    id: 2,
+    id: 1,
   },
   {
     name: 'Apricot',
-    id: 3,
+    id: 2,
   },
   {
     name: 'Blackberry',
-    id: 4,
+    id: 3,
   },
   {
     name: 'Blueberry',
-    id: 5,
+    id: 4,
   },
   {
     name: 'Cactus Fruit',
-    id: 6,
+    id: 5,
   },
   {
     name: 'Cherry',
-    id: 7,
+    id: 6,
   },
   {
     name: 'Coconut',
-    id: 8,
+    id: 7,
   },
   {
     name: 'Cranberries',
-    id: 9,
+    id: 8,
   },
   {
     name: 'Crystal Fruit',
-    id: 10,
+    id: 9,
   },
   {
     name: 'Grape',
-    id: 11,
+    id: 10,
   },
   {
     name: 'Hot Pepper',
-    id: 12,
+    id: 11,
   },
   {
     name: 'Melon',
-    id: 13,
+    id: 12,
   },
   {
     name: 'Orange',
-    id: 14,
+    id: 13,
   },
   {
     name: 'Peach',
-    id: 15,
+    id: 14,
   },
   {
     name: 'Pomegranate',
-    id: 16,
+    id: 15,
   },
   {
     name: 'Rhubarb',
-    id: 17,
+    id: 16,
   },
   {
     name: 'Salmonberry',
-    id: 18,
+    id: 17,
   },
   {
     name: 'Spice Berry',
-    id: 19,
+    id: 18,
   },
   {
     name: 'Starfruit',
-    id: 20,
+    id: 19,
   },
   {
     name: 'Strawberry',
-    id: 21,
+    id: 20,
   },
   {
     name: 'Wild Plum',
-    id: 22,
+    id: 21,
   },
 ];
 
 export default {
-  fruits,
+  FRUITS,
 };

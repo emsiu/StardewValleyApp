@@ -3,87 +3,78 @@ import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 import './Item.css';
-import { fruits } from './Fruits';
 import Item from './Item';
 
 class StardewValleyApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
-      text: '',
+      selectedItems: [],
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.addSelectedItem = this.addSelectedItem.bind(this);
+    this.removeSelectedItem = this.removeSelectedItem.bind(this);
   }
 
-  handleChange(e) {
+  addSelectedItem(item) {
+    const { selectedItems } = this.state;
+    const newSet = selectedItems.concat(item);
     this.setState({
-      text: e.target.value,
+      selectedItems: newSet,
     });
+    console.log('this one is', newSet, item);
   }
 
-  handleSubmit(e) {
-    const { text: stateText } = this.state;
-    e.preventDefault();
-    if (!stateText.length) {
-      return;
-    }
-    const newItem = {
-      text: stateText,
-      id: Date.now(),
-    };
-    this.setState(state => ({
-      items: state.items.concat(newItem),
-      text: '',
-    }));
+  removeSelectedItem(item) {
+    const { selectedItems } = this.state;
+    const index = selectedItems.indexOf(item);
+    const newSet = [
+      ...selectedItems.slice(0, index),
+      ...selectedItems.slice(index + 1),
+    ];
+    this.setState({
+      selectedItems: newSet,
+    });
+    console.log('is this working', newSet, item, index);
   }
 
   render() {
-    const { items, text } = this.state;
+    const { selectedItems } = this.state;
+    const { data } = this.props;
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <ItemList items={fruits} />
-          <ItemList items={items} />
-          <form onSubmit={this.handleSubmit}>
-            <input
-              id="new-item"
-              onChange={this.handleChange}
-              value={text}
-            />
-            <br />
-            <button type="submit">
-              Add item #
-              {items.length + 1}
-            </button>
-          </form>
+          <ul>
+            {selectedItems.map(item => (
+              <li key={item.id}>
+                <Item key={item.id} item={item} />
+              </li>
+            ))}
+          </ul>
+          <ul>
+            {data.map(dat => (
+              <li key={dat.id}>
+                <Item
+                  key={dat.id}
+                  item={dat}
+                  parentAddSelectedItem={this.addSelectedItem}
+                  parentRemoveSelectedItem={this.removeSelectedItem}
+                />
+              </li>
+            ))}
+          </ul>
         </header>
       </div>
     );
   }
 }
 
-function ItemList(props) {
-  const { items } = props;
-  return (
-    <ul>
-      {items.map(item => (
-        <li key={item.id}>
-          <Item key={item.id} item={item} />
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-ItemList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])),
+StardewValleyApp.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object])),
 };
 
-ItemList.defaultProps = {
-  items: null,
+StardewValleyApp.defaultProps = {
+  data: null,
 };
 
 export default StardewValleyApp;

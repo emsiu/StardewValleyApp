@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import StardewValleyApp from './App';
+import { FRUITS } from './Fruits';
 
 ReactDOM.render(
-  <StardewValleyApp />,
+  <StardewValleyApp data={FRUITS} />,
   document.getElementById('root'),
 );
 
