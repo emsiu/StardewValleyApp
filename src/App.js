@@ -8,8 +8,10 @@ import Item from './Item';
 class StardewValleyApp extends React.Component {
   constructor(props) {
     super(props);
+    const { data } = this.props;
     this.state = {
       selectedItems: [],
+      allItems: data,
     };
     this.addSelectedItem = this.addSelectedItem.bind(this);
     this.removeSelectedItem = this.removeSelectedItem.bind(this);
@@ -21,7 +23,6 @@ class StardewValleyApp extends React.Component {
     this.setState({
       selectedItems: newSet,
     });
-    console.log('this one is', newSet, item);
   }
 
   removeSelectedItem(item) {
@@ -34,12 +35,10 @@ class StardewValleyApp extends React.Component {
     this.setState({
       selectedItems: newSet,
     });
-    console.log('is this working', newSet, item, index);
   }
 
   render() {
-    const { selectedItems } = this.state;
-    const { data } = this.props;
+    const { selectedItems, allItems } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -47,16 +46,23 @@ class StardewValleyApp extends React.Component {
           <ul>
             {selectedItems.map(item => (
               <li key={item.id}>
-                <Item key={item.id} item={item} />
+                <Item
+                  key={item.id}
+                  item={item}
+                  selected
+                  parentAddSelectedItem={this.addSelectedItem}
+                  parentRemoveSelectedItem={this.removeSelectedItem}
+                />
               </li>
             ))}
           </ul>
           <ul>
-            {data.map(dat => (
-              <li key={dat.id}>
+            {allItems.map(item => (
+              <li key={item.id}>
                 <Item
-                  key={dat.id}
-                  item={dat}
+                  key={item.id}
+                  item={item}
+                  selected={!selectedItems.indexOf(item)}
                   parentAddSelectedItem={this.addSelectedItem}
                   parentRemoveSelectedItem={this.removeSelectedItem}
                 />

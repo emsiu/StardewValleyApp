@@ -4,12 +4,35 @@ import PropTypes from 'prop-types';
 class Item extends React.Component {
   constructor(props) {
     super(props);
+    let isActive = false;
+    const { selected } = this.props;
+    if (selected) {
+      isActive = true;
+    }
     this.state = {
-      active: false,
-      class: 'item',
+      active: isActive,
+      class: !isActive ? 'item' : 'item active',
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { active } = this.state;
+    if (nextProps.selected !== active) {
+      this.updateItem(nextProps.selected);
+    }
+  }
+
+  updateItem(selected) {
+    let isActive = false;
+    if (selected) {
+      isActive = true;
+    }
+    this.setState({
+      active: isActive,
+      class: !isActive ? 'item' : 'item active',
+    });
   }
 
   handleClick() {
@@ -19,12 +42,9 @@ class Item extends React.Component {
       active: !stateActive,
       class: stateActive ? 'item' : 'item active',
     });
-    console.log(stateActive);
     if (!stateActive && parentAddSelectedItem) {
-      console.log('add');
       parentAddSelectedItem(item);
     } else if (stateActive && parentRemoveSelectedItem) {
-      console.log('remove');
       parentRemoveSelectedItem(item);
     }
   }
@@ -56,12 +76,14 @@ Item.propTypes = {
   item: PropTypes.oneOfType([PropTypes.object]),
   parentAddSelectedItem: PropTypes.func,
   parentRemoveSelectedItem: PropTypes.func,
+  selected: PropTypes.bool,
 };
 
 Item.defaultProps = {
   item: null,
   parentAddSelectedItem: null,
   parentRemoveSelectedItem: null,
+  selected: false,
 };
 
 export default Item;
