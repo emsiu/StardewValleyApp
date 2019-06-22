@@ -4,48 +4,22 @@ import PropTypes from 'prop-types';
 class Item extends React.Component {
   constructor(props) {
     super(props);
-    let isActive = false;
-    const { selected } = this.props;
-    if (selected) {
-      isActive = true;
-    }
-    this.state = {
-      active: isActive,
-      class: !isActive ? 'item' : 'item active',
-    };
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { active } = this.state;
-    if (nextProps.selected !== active) {
-      this.updateItem(nextProps.selected);
-    }
-  }
-
-  updateItem(selected) {
-    let isActive = false;
-    if (selected) {
-      isActive = true;
-    }
-    this.setState({
-      active: isActive,
-      class: !isActive ? 'item' : 'item active',
-    });
-  }
-
   handleClick() {
-    const { active: stateActive } = this.state;
-    const { item, parentAddSelectedItem, parentRemoveSelectedItem } = this.props;
-    this.setState({
-      active: !stateActive,
-      class: stateActive ? 'item' : 'item active',
-    });
-    if (!stateActive && parentAddSelectedItem) {
+    const {
+      item,
+      parentAddSelectedItem,
+      parentRemoveSelectedItem,
+      parentUpdateAllItems,
+    } = this.props;
+    if (!item.active && parentAddSelectedItem) {
       parentAddSelectedItem(item);
-    } else if (stateActive && parentRemoveSelectedItem) {
+    } else if (item.active && parentRemoveSelectedItem) {
       parentRemoveSelectedItem(item);
+      parentUpdateAllItems(item);
     }
   }
 
@@ -56,11 +30,10 @@ class Item extends React.Component {
   }
 
   render() {
-    const { class: stateClass } = this.state;
     const { item } = this.props;
     return (
       <div
-        className={stateClass}
+        className={item.active ? 'item active' : 'item'}
         onClick={this.handleClick}
         onKeyUp={this.handleKeyPress}
         role="button"
@@ -76,14 +49,14 @@ Item.propTypes = {
   item: PropTypes.oneOfType([PropTypes.object]),
   parentAddSelectedItem: PropTypes.func,
   parentRemoveSelectedItem: PropTypes.func,
-  selected: PropTypes.bool,
+  parentUpdateAllItems: PropTypes.func,
 };
 
 Item.defaultProps = {
   item: null,
   parentAddSelectedItem: null,
   parentRemoveSelectedItem: null,
-  selected: false,
+  parentUpdateAllItems: null,
 };
 
 export default Item;
