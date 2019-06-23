@@ -23,7 +23,6 @@ class MediaWiki extends React.Component {
   cleanUpResponse(reactionsText) {
     const updatedText = reactionsText.substring(0, reactionsText.length - 2).split('|');
     updatedText.splice(0, 1);
-    console.log('cleanUpResponse', updatedText);
     return updatedText;
   }
 
@@ -38,11 +37,9 @@ class MediaWiki extends React.Component {
         parsedReactions[category] = namesList;
       });
     }
-    console.log('parsed reactions', parsedReactions);
     this.setState({
       reactionsList: parsedReactions,
     });
-    console.log('res', parsedReactions);
     return parsedReactions;
   }
 
@@ -57,7 +54,6 @@ class MediaWiki extends React.Component {
       .then(
         (result) => {
           const parseWikitext = result.data.parse.wikitext;
-          console.log('fetched wikitext', parseWikitext);
           const reactionsList = this.cleanUpResponse(parseWikitext['*']);
           return this.parseReactions(reactionsList);
         },
@@ -75,11 +71,9 @@ class MediaWiki extends React.Component {
     console.log('sectionsUrl', sectionUrl);
     let sectionIndex = -1;
     axios.get(sectionUrl)
-      // .then(res => res.json())
       .then(
         (result) => {
           const parseSections = result.data.parse.sections;
-          console.log('fetched sections result', parseSections);
           const giftingSection = parseSections.filter(section => section.line === 'Gifting')[0];
           sectionIndex = giftingSection.index;
           return sectionIndex;
@@ -102,53 +96,30 @@ class MediaWiki extends React.Component {
     return this.getSectionIndex(baseUrl, itemName);
   }
 
+  addRenderReaction(reactionExists, text, renderReactions) {
+    if (reactionExists) {
+      reactionExists.sort();
+      renderReactions.push(
+        <li key={text}>
+          {text}
+          {reactionExists.map((name, index) => <span key={name}>{(index ? ', ' : '') + name}</span>)}
+        </li>,
+      );
+    }
+  }
+
   getRenderReactions(reactionsList) {
     const renderReactions = [];
     const loveExists = reactionsList.love;
-    if (loveExists) {
-      renderReactions.push(
-        <li>
-          Love:
-          {reactionsList.love}
-        </li>,
-      );
-    }
     const likeExists = reactionsList.like;
-    if (likeExists) {
-      renderReactions.push(
-        <li>
-          Like:
-          {reactionsList.like}
-        </li>,
-      );
-    }
     const neutralExists = reactionsList.neutral;
-    if (neutralExists) {
-      renderReactions.push(
-        <li>
-          Neutral:
-          {reactionsList.neutral}
-        </li>,
-      );
-    }
     const dislikeExists = reactionsList.dislike;
-    if (dislikeExists) {
-      renderReactions.push(
-        <li>
-          Dislike:
-          {reactionsList.dislike}
-        </li>,
-      );
-    }
     const hateExists = reactionsList.hate;
-    if (hateExists) {
-      renderReactions.push(
-        <li>
-          Hate:
-          {reactionsList.hate}
-        </li>,
-      );
-    }
+    this.addRenderReaction(loveExists, 'Love: ', renderReactions);
+    this.addRenderReaction(likeExists, 'Like: ', renderReactions);
+    this.addRenderReaction(neutralExists, 'Neutral: ', renderReactions);
+    this.addRenderReaction(dislikeExists, 'Dislike:', renderReactions);
+    this.addRenderReaction(hateExists, 'Hate: ', renderReactions);
     return renderReactions;
   }
 
