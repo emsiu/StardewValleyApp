@@ -59,7 +59,6 @@ class MediaWiki extends React.Component {
           const parseWikitext = result.data.parse.wikitext;
           console.log('fetched wikitext', parseWikitext);
           const reactionsList = this.cleanUpResponse(parseWikitext['*']);
-
           return this.parseReactions(reactionsList);
         },
       )
@@ -103,32 +102,64 @@ class MediaWiki extends React.Component {
     return this.getSectionIndex(baseUrl, itemName);
   }
 
+  getRenderReactions(reactionsList) {
+    const renderReactions = [];
+    const loveExists = reactionsList.love;
+    if (loveExists) {
+      renderReactions.push(
+        <li>
+          Love:
+          {reactionsList.love}
+        </li>,
+      );
+    }
+    const likeExists = reactionsList.like;
+    if (likeExists) {
+      renderReactions.push(
+        <li>
+          Like:
+          {reactionsList.like}
+        </li>,
+      );
+    }
+    const neutralExists = reactionsList.neutral;
+    if (neutralExists) {
+      renderReactions.push(
+        <li>
+          Neutral:
+          {reactionsList.neutral}
+        </li>,
+      );
+    }
+    const dislikeExists = reactionsList.dislike;
+    if (dislikeExists) {
+      renderReactions.push(
+        <li>
+          Dislike:
+          {reactionsList.dislike}
+        </li>,
+      );
+    }
+    const hateExists = reactionsList.hate;
+    if (hateExists) {
+      renderReactions.push(
+        <li>
+          Hate:
+          {reactionsList.hate}
+        </li>,
+      );
+    }
+    return renderReactions;
+  }
+
   render() {
     const { reactionsList } = this.state;
     console.log('render reactionsList', reactionsList);
+    const renderReactions = this.getRenderReactions(reactionsList);
     return (
       <div>
         <ul>
-          <li>
-            Love:
-            {reactionsList.love}
-          </li>
-          <li>
-            Like:
-            {reactionsList.like}
-          </li>
-          <li>
-            Neutral:
-            {reactionsList.neutral}
-          </li>
-          <li>
-            Dislike:
-            {reactionsList.dislike}
-          </li>
-          <li>
-            Hate:
-            {reactionsList.hate}
-          </li>
+          {renderReactions.map(reaction => reaction)}
         </ul>
       </div>
     );

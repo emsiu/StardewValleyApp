@@ -3,6 +3,21 @@
   "plugins": ["jsx-a11y"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
-    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["item"] }]
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["item"] }],
+    "class-methods-use-this": ["error", { "exceptMethods": ["cleanUpResponse", "getRenderReactions"] }],
+    "react/sort-comp": [1, {
+      "order": [
+        "static-methods",
+        "lifecycle",
+        "everything-else",
+        "rendering"
+      ],
+      "groups": {
+        "rendering": [
+          "/^render.+$/",
+          "render"
+        ]
+      }
+    }]
   }
 }
