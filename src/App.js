@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import './Item.css';
 import Item from './Item';
+import { mediaWikiCall } from './MediaWiki';
 
 class StardewValleyApp extends React.Component {
   constructor(props) {
@@ -31,13 +32,15 @@ class StardewValleyApp extends React.Component {
   }
 
   addSelectedItem(item) {
-    console.debug('add item', item);
+    console.log('add item', item);
     const { selectedItems } = this.state;
     item.active = true;
     const newSet = selectedItems.concat(item);
     this.setState({
       selectedItems: newSet,
     });
+    const res = mediaWikiCall(item.name);
+    console.log('media wiki call res', res);
   }
 
   removeSelectedItem(item) {
