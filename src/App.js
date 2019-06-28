@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 import logo from './logo.svg';
 import './App.css';
 import './Item.css';
@@ -73,9 +74,14 @@ class StardewValleyApp extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <p data-tip="React-tooltip">Select items from the list of fruits below. Then hover over the selected items in Inventory to see the villager reactions.</p>
+          <ReactTooltip place="bottom" type="light" effect="float">
+            ◕‿‿◕
+          </ReactTooltip>
+          <p>Inventory</p>
           <ul>
             {selectedItems.map(item => (
-              <li key={item.id}>
+              <li key={item.id} data-for={item.id} data-tip>
                 <Item
                   key={item.id}
                   item={item}
@@ -83,10 +89,14 @@ class StardewValleyApp extends React.Component {
                   parentRemoveSelectedItem={this.removeSelectedItem}
                   parentUpdateAllItems={this.updateAllItems}
                 />
-                <MediaWiki itemName={item.name} />
+                <ReactTooltip id={item.id} place="bottom" type="light" effect="float">
+                  Villager Reactions:
+                  <MediaWiki itemName={item.name} />
+                </ReactTooltip>
               </li>
             ))}
           </ul>
+          <p>Fruits</p>
           <ul>
             {allItems.map(item => (
               <li key={item.id}>
