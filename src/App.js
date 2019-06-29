@@ -10,17 +10,11 @@ import MediaWiki from './MediaWiki';
 class StardewValleyApp extends React.Component {
   constructor(props) {
     super(props);
-    const { data } = this.props;
+    const { data, data2 } = this.props;
 
     const itemsList = [];
-    for (let i = 0; i < data.length; i += 1) {
-      const item = {
-        name: data[i],
-        id: data[i],
-        active: false,
-      };
-      itemsList.push(item);
-    }
+    this.populateItemList(data, itemsList);
+    this.populateItemList(data2, itemsList);
 
     this.state = {
       selectedItems: [],
@@ -30,6 +24,17 @@ class StardewValleyApp extends React.Component {
     this.addSelectedItem = this.addSelectedItem.bind(this);
     this.removeSelectedItem = this.removeSelectedItem.bind(this);
     this.updateAllItems = this.updateAllItems.bind(this);
+  }
+
+  populateItemList(data, itemsList) {
+    for (let i = 0; i < data.length; i += 1) {
+      const item = {
+        name: data[i],
+        id: data[i],
+        active: false,
+      };
+      itemsList.push(item);
+    }
   }
 
   addSelectedItem(item) {
@@ -96,7 +101,7 @@ class StardewValleyApp extends React.Component {
               </li>
             ))}
           </ul>
-          <p>Fruits</p>
+          <p>Fruits and Flowers</p>
           <ul>
             {allItems.map(item => (
               <li key={item.id}>
@@ -118,10 +123,12 @@ class StardewValleyApp extends React.Component {
 
 StardewValleyApp.propTypes = {
   data: PropTypes.arrayOf(PropTypes.string),
+  data2: PropTypes.arrayOf(PropTypes.string),
 };
 
 StardewValleyApp.defaultProps = {
   data: null,
+  data2: null,
 };
 
 export default StardewValleyApp;

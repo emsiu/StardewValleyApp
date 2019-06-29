@@ -4,7 +4,9 @@
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["item"] }],
-    "class-methods-use-this": ["error", { "exceptMethods": ["cleanUpResponse", "addRenderReaction", "getRenderReactions"] }],
+    "class-methods-use-this": ["error", {
+      "exceptMethods": ["cleanUpResponse", "addRenderReaction", "getRenderReactions", "populateItemList"]
+    }],
     "react/sort-comp": [1, {
       "order": [
         "static-methods",

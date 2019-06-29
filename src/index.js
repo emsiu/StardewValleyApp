@@ -4,9 +4,10 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import StardewValleyApp from './App';
 import { FRUITS } from './Fruits';
+import { FLOWERS } from './Flowers';
 
 ReactDOM.render(
-  <StardewValleyApp data={FRUITS} />,
+  <StardewValleyApp data={FRUITS} data2={FLOWERS} />,
   document.getElementById('root'),
 );
 
