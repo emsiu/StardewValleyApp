@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import logo from './logo.svg';
 import './App.css';
 import './Item.css';
@@ -84,23 +89,32 @@ class StardewValleyApp extends React.Component {
             ◕‿‿◕
           </ReactTooltip>
           <p>Inventory</p>
-          <ul>
-            {selectedItems.map(item => (
-              <li key={item.id} data-for={item.id} data-tip>
-                <Item
-                  key={item.id}
-                  item={item}
-                  parentAddSelectedItem={this.addSelectedItem}
-                  parentRemoveSelectedItem={this.removeSelectedItem}
-                  parentUpdateAllItems={this.updateAllItems}
-                />
-                <ReactTooltip id={item.id} place="bottom" type="light" effect="float">
-                  Villager Reactions:
-                  <MediaWiki itemName={item.name} />
-                </ReactTooltip>
-              </li>
-            ))}
-          </ul>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Item Name</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {selectedItems.map(item => (
+                <TableRow key={item.id} data-for={item.id} data-tip>
+                  <TableCell>
+                    <Item
+                      key={item.id}
+                      item={item}
+                      parentAddSelectedItem={this.addSelectedItem}
+                      parentRemoveSelectedItem={this.removeSelectedItem}
+                      parentUpdateAllItems={this.updateAllItems}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    Villager Reactions:
+                    <MediaWiki itemName={item.name} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
           <p>Fruits and Flowers</p>
           <ul>
             {allItems.map(item => (
