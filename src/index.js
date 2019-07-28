@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import StardewValleyApp from './App';
-import { FRUITS } from './Fruits';
-import { FLOWERS } from './Flowers';
+import { FRUITS } from './constants/Fruits';
+import { FLOWERS } from './constants/Flowers';
+import { VEGETABLES } from './constants/Vegetables';
 
 ReactDOM.render(
-  <StardewValleyApp data={FRUITS} data2={FLOWERS} />,
+  <StardewValleyApp data={[...FRUITS, ...FLOWERS, ...VEGETABLES]} />,
   document.getElementById('root'),
 );
 

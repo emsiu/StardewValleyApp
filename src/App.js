@@ -15,11 +15,10 @@ import MediaWiki from './MediaWiki';
 class StardewValleyApp extends React.Component {
   constructor(props) {
     super(props);
-    const { data, data2 } = this.props;
+    const { data } = this.props;
 
     const itemsList = [];
     this.populateItemList(data, itemsList);
-    this.populateItemList(data2, itemsList);
 
     this.state = {
       selectedItems: [],
@@ -137,12 +136,10 @@ class StardewValleyApp extends React.Component {
 
 StardewValleyApp.propTypes = {
   data: PropTypes.arrayOf(PropTypes.string),
-  data2: PropTypes.arrayOf(PropTypes.string),
 };
 
 StardewValleyApp.defaultProps = {
   data: null,
-  data2: null,
 };
 
 export default StardewValleyApp;
