@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import logo from './logo.svg';
 import './App.css';
 import './Item.css';
+import './MediaWiki.css';
 import Item from './Item';
 import MediaWiki from './MediaWiki';
 
@@ -91,7 +92,7 @@ class StardewValleyApp extends React.Component {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Item Name</TableCell>
+                <TableCell ><p className="App-text">Item Name</p></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -107,7 +108,7 @@ class StardewValleyApp extends React.Component {
                     />
                   </TableCell>
                   <TableCell>
-                    Villager Reactions:
+                    <p className="App-text">Villager Reactions</p>:
                     <MediaWiki itemName={item.name} />
                   </TableCell>
                 </TableRow>

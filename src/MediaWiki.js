@@ -129,7 +129,7 @@ class MediaWiki extends React.Component {
     const renderReactions = this.getRenderReactions(reactionsList);
     return (
       <div>
-        <ul>
+        <ul className="MediaWiki-reactions">
           {renderReactions.map(reaction => reaction)}
         </ul>
       </div>
